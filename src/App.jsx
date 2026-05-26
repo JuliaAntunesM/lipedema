@@ -1,6 +1,8 @@
+import { Routes, Route, Link } from 'react-router-dom'
 import { Heart, Activity, Calendar, Users, Shield, Smartphone, Star, ArrowRight } from 'lucide-react'
+import Projeto from './pages/Projeto'
 
-function App() {
+function LandingPage() {
   return (
     <div className="min-h-screen">
       {/* Header */}
@@ -10,9 +12,9 @@ function App() {
             <Heart className="w-8 h-8 text-primary-600" />
             <span className="text-xl font-bold text-gray-900">LipedemaCare</span>
           </div>
-          <button className="bg-primary-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-primary-700 transition-colors">
-            Baixar App
-          </button>
+          <Link to="/projeto" className="bg-primary-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-primary-700 transition-colors">
+            Acessar Sistema
+          </Link>
         </nav>
       </header>
 
@@ -29,10 +31,10 @@ function App() {
               aliviar sintomas e recuperar sua qualidade de vida.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-primary-600 text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-primary-700 transition-colors flex items-center justify-center gap-2">
+              <Link to="/projeto" className="bg-primary-600 text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-primary-700 transition-colors flex items-center justify-center gap-2">
                 <Smartphone className="w-5 h-5" />
                 Começar Agora
-              </button>
+              </Link>
               <button className="border-2 border-primary-600 text-primary-600 px-8 py-4 rounded-full font-semibold text-lg hover:bg-primary-50 transition-colors">
                 Saiba Mais
               </button>
@@ -283,6 +285,15 @@ function App() {
         </div>
       </footer>
     </div>
+  )
+}
+
+function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<LandingPage />} />
+      <Route path="/projeto" element={<Projeto />} />
+    </Routes>
   )
 }
 
