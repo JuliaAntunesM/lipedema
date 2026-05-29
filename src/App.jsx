@@ -240,12 +240,9 @@ function LandingPage() {
             Junte-se a milhares de mulheres que já transformaram suas vidas com o LipedemaCare
           </p>
           <Link to="/projeto" className="bg-white text-primary-600 px-8 py-4 rounded-full font-semibold text-lg hover:bg-gray-100 transition-colors flex items-center justify-center gap-2 mx-auto">
-            Baixar Gratuitamente
+            Quero Participar
             <ArrowRight className="w-5 h-5" />
           </Link>
-          <p className="text-white/80 mt-4 text-sm">
-            Disponível para iOS e Android
-          </p>
         </div>
       </section>
 
