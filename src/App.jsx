@@ -31,6 +31,13 @@ function LandingPage() {
         </div>
       </section>
 
+      {/* Imagem Central */}
+      <section className="py-8 px-4 sm:px-6 lg:px-8 bg-white">
+        <div className="max-w-4xl mx-auto">
+          <img src="/fotos/1.png" alt="LipedemaCare" className="w-full rounded-3xl shadow-xl" />
+        </div>
+      </section>
+
       {/* Seção Emocional - Impacto no Dia a Dia */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white to-primary-50">
         <div className="max-w-7xl mx-auto">
@@ -137,14 +144,8 @@ function LandingPage() {
             </p>
           </div>
           <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="relative">
-              <div className="bg-gradient-to-br from-primary-500 to-purple-600 rounded-3xl shadow-2xl p-8 flex items-center justify-center">
-                <img src="/fotos/CarinaSilva.png" alt="Carina Silva" className="w-64 h-64 object-cover rounded-3xl" />
-              </div>
-              <div className="absolute -bottom-4 -right-4 bg-white p-4 rounded-2xl shadow-lg hidden md:block">
-                <p className="font-bold text-2xl text-primary-600">5+</p>
-                <p className="text-sm text-gray-600">Anos de experiência</p>
-              </div>
+            <div>
+              <img src="/fotos/CarinaSilva.png" alt="Carina Silva" className="w-full rounded-3xl shadow-xl" />
             </div>
             <div className="space-y-6">
               <div>
