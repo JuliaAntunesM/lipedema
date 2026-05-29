@@ -12,9 +12,6 @@ function LandingPage() {
             <Heart className="w-8 h-8 text-primary-600" />
             <span className="text-xl font-bold text-gray-900">LipedemaCare</span>
           </div>
-          <Link to="/projeto" className="bg-primary-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-primary-700 transition-colors">
-            Acessar Sistema
-          </Link>
         </nav>
       </header>
 
@@ -25,29 +22,16 @@ function LandingPage() {
             <div className="text-center lg:text-left">
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
                 Você Não Precisa Viver com Essa
-                <span className="text-gradient"> Dor Anymore</span>
+                <span className="text-gradient"> Dor</span>
               </h1>
               <p className="text-xl text-gray-600 mb-8">
                 Sabemos como é difícil acordar todos os dias com as pernas pesadas, com dor constante, e sentir que seu corpo não te deixa viver plenamente. 
                 O LipedemaCare está aqui para transformar essa realidade.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                <Link to="/projeto" className="bg-primary-600 text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-primary-700 transition-colors flex items-center justify-center gap-2">
-                  <Smartphone className="w-5 h-5" />
-                  Quero Viver Sem Dor
-                </Link>
-                <button className="border-2 border-primary-600 text-primary-600 px-8 py-4 rounded-full font-semibold text-lg hover:bg-primary-50 transition-colors">
-                  Saiba Mais
-                </button>
-              </div>
             </div>
             <div className="relative">
               <div className="bg-gradient-to-br from-primary-500 to-purple-600 rounded-3xl shadow-2xl w-full max-w-lg mx-auto p-12 flex items-center justify-center">
                 <Heart className="w-32 h-32 text-white" />
-              </div>
-              <div className="absolute -bottom-4 -right-4 bg-primary-600 text-white p-4 rounded-2xl shadow-lg hidden sm:block">
-                <p className="font-bold text-lg">+10.000</p>
-                <p className="text-sm">Mulheres transformadas</p>
               </div>
             </div>
           </div>
