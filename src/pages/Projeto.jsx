@@ -27,6 +27,67 @@ function Projeto() {
     }
   }, [])
 
+  // Animar gráficos quando estiver em loading
+  useEffect(() => {
+    if (currentStep === 'loading') {
+      const peso = parseFloat(formData.peso) || 70
+      const altura = parseFloat(formData.altura) || 165
+      const nivelDor = parseInt(formData.nivelDor) || 5
+      const dataNasc = formData.dataNascimento || '1990-01-01'
+      
+      // Calcular idade aproximada
+      const idade = new Date().getFullYear() - new Date(dataNasc).getFullYear()
+      
+      // Calcular percentual de gordura aproximado (simplificado)
+      const gorduraPercent = Math.min(40, Math.max(15, (peso / (altura * altura)) * 1000))
+      
+      // Animar gordura
+      let gorduraValue = 0
+      const gorduraInterval = setInterval(() => {
+        gorduraValue += 1
+        const gorduraEl = document.getElementById('gordura-percent')
+        const gorduraBar = document.getElementById('gordura-bar')
+        if (gorduraEl) gorduraEl.textContent = gorduraValue + '%'
+        if (gorduraBar) gorduraBar.style.width = (gorduraValue / 40 * 100) + '%'
+        if (gorduraValue >= gorduraPercent) clearInterval(gorduraInterval)
+      }, 50)
+      
+      // Animar idade
+      let idadeValue = 0
+      const idadeInterval = setInterval(() => {
+        idadeValue += 1
+        const idadeEl = document.getElementById('idade-analise')
+        const idadeBar = document.getElementById('idade-bar')
+        if (idadeEl) idadeEl.textContent = idadeValue
+        if (idadeBar) idadeBar.style.width = (idadeValue / 80 * 100) + '%'
+        if (idadeValue >= idade) clearInterval(idadeInterval)
+      }, 50)
+      
+      // Animar dor
+      let dorValue = 0
+      const dorInterval = setInterval(() => {
+        dorValue += 1
+        const dorEl = document.getElementById('dor-nivel')
+        const dorBar = document.getElementById('dor-bar')
+        if (dorEl) dorEl.textContent = dorValue
+        if (dorBar) dorBar.style.width = (dorValue / 10 * 100) + '%'
+        if (dorValue >= nivelDor) clearInterval(dorInterval)
+      }, 50)
+      
+      // Mudar status após animação
+      setTimeout(() => {
+        const statusEl = document.getElementById('plano-status')
+        if (statusEl) statusEl.textContent = 'Plano Gerado!'
+      }, 2000)
+      
+      return () => {
+        clearInterval(gorduraInterval)
+        clearInterval(idadeInterval)
+        clearInterval(dorInterval)
+      }
+    }
+  }, [currentStep, formData])
+
   // Salvar dados no localStorage
   const handleSave = () => {
     localStorage.setItem('lipedemaData', JSON.stringify(formData))
@@ -40,13 +101,17 @@ function Projeto() {
     setCurrentStep('loading')
     localStorage.setItem('lipedemaData', JSON.stringify(formData))
     
-    // Simular tempo de processamento e redirecionar para checkout
+    // Simular tempo de processamento
     setTimeout(() => {
       const recs = generateRecommendations(formData)
       setRecommendations(recs)
       setIsGenerating(false)
-      // Redirecionar para checkout após gerar recomendações
-      window.open('https://lastlink.com/p/C3B759A85/checkout-payment/', '_blank')
+      setCurrentStep('results')
+      
+      // Redirecionar automaticamente para checkout após 5 segundos
+      setTimeout(() => {
+        window.open('https://lastlink.com/p/C3B759A85/checkout-payment/', '_blank')
+      }, 5000)
     }, 3000)
   }
 
@@ -438,32 +503,40 @@ function Projeto() {
         {/* Step 2: Loading */}
         {currentStep === 'loading' && (
           <div className="flex items-center justify-center min-h-[600px]">
-            <div className="text-center">
+            <div className="text-center max-w-2xl mx-auto">
               <div className="relative mb-8">
-                <div className="absolute inset-0 bg-gradient-to-r from-primary-600 to-purple-600 rounded-full blur-xl opacity-50 animate-pulse"></div>
-                <div className="relative bg-gradient-to-r from-primary-600 to-purple-600 rounded-full p-8">
-                  <Loader2 className="w-16 h-16 text-white animate-spin" />
+                <div className="w-20 h-20 border-4 border-primary-200 border-t-primary-600 rounded-full animate-spin mx-auto"></div>
+              </div>
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">Gerando Plano</h2>
+              <p className="text-gray-600 text-lg mb-8">Analisando seus dados e criando recomendações exclusivas...</p>
+              
+              {/* Gráficos Animados */}
+              <div className="grid md:grid-cols-3 gap-6 mb-8">
+                <div className="bg-white p-6 rounded-2xl shadow-lg">
+                  <div className="text-4xl font-bold text-primary-600 mb-2" id="gordura-percent">0%</div>
+                  <p className="text-gray-600 text-sm">Percentual de Gordura</p>
+                  <div className="w-full bg-gray-200 rounded-full h-2 mt-3">
+                    <div className="bg-primary-600 h-2 rounded-full transition-all duration-1000" id="gordura-bar" style={{width: '0%'}}></div>
+                  </div>
+                </div>
+                <div className="bg-white p-6 rounded-2xl shadow-lg">
+                  <div className="text-4xl font-bold text-purple-600 mb-2" id="idade-analise">0</div>
+                  <p className="text-gray-600 text-sm">Idade Analisada</p>
+                  <div className="w-full bg-gray-200 rounded-full h-2 mt-3">
+                    <div className="bg-purple-600 h-2 rounded-full transition-all duration-1000" id="idade-bar" style={{width: '0%'}}></div>
+                  </div>
+                </div>
+                <div className="bg-white p-6 rounded-2xl shadow-lg">
+                  <div className="text-4xl font-bold text-pink-600 mb-2" id="dor-nivel">0</div>
+                  <p className="text-gray-600 text-sm">Nível de Dor</p>
+                  <div className="w-full bg-gray-200 rounded-full h-2 mt-3">
+                    <div className="bg-pink-600 h-2 rounded-full transition-all duration-1000" id="dor-bar" style={{width: '0%'}}></div>
+                  </div>
                 </div>
               </div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">Gerando seu Plano Personalizado</h2>
-              <p className="text-gray-600 text-lg mb-8">Analisando seus dados e criando recomendações exclusivas...</p>
-              <div className="space-y-3 text-left max-w-md mx-auto">
-                <div className="flex items-center gap-3 text-gray-600">
-                  <Sparkles className="w-5 h-5 text-green-500" />
-                  <span>Gerando receitas personalizadas...</span>
-                </div>
-                <div className="flex items-center gap-3 text-gray-600">
-                  <Sparkles className="w-5 h-5 text-blue-500" />
-                  <span>Criando treinos personalizados...</span>
-                </div>
-                <div className="flex items-center gap-3 text-gray-600">
-                  <Sparkles className="w-5 h-5 text-purple-500" />
-                  <span>Preparando protocolo de massagem...</span>
-                </div>
-                <div className="flex items-center gap-3 text-gray-600">
-                  <Sparkles className="w-5 h-5 text-primary-600" />
-                  <span>Finalizando seu plano...</span>
-                </div>
+
+              <div className="text-green-600 font-semibold text-xl" id="plano-status">
+                Calculando...
               </div>
             </div>
           </div>
@@ -474,182 +547,62 @@ function Projeto() {
           <div className="space-y-8">
             {/* Header de Resultados */}
             <div className="bg-gradient-to-r from-primary-600 to-purple-600 rounded-2xl shadow-lg p-8 text-white">
-              <div className="flex items-center justify-between mb-6">
-                <div>
-                  <h2 className="text-3xl font-bold mb-2">Seu Plano Personalizado</h2>
-                  <p className="text-white/90">Criado exclusivamente para {recommendations.nome}</p>
-                </div>
-                <button
-                  onClick={() => setCurrentStep('form')}
-                  className="flex items-center gap-2 bg-white/20 hover:bg-white/30 px-6 py-3 rounded-full font-semibold transition-colors"
-                >
-                  <Calendar className="w-5 h-5" />
-                  Editar Dados
-                </button>
+              <div className="text-center">
+                <h2 className="text-3xl font-bold mb-2">Plano Gerado!</h2>
+                <p className="text-white/90">Criado exclusivamente para {recommendations.nome}</p>
               </div>
-              
-              {/* Pontuação de Saúde */}
+            </div>
+
+            {/* CTA com Carina Silva */}
+            <div className="bg-white rounded-2xl shadow-lg p-8">
+              <div className="grid md:grid-cols-2 gap-8 items-center">
+                <div>
+                  <img src="/fotos/CarinaSilva.png" alt="Carina Silva" className="w-64 h-64 object-cover rounded-3xl mx-auto" />
+                </div>
+                <div className="text-center md:text-left">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                    Faça sua Matrícula com a Profissional Carina Silva
+                  </h3>
+                  <p className="text-gray-600 mb-6">
+                    Garanta sua participação no programa Lipedema Care e receba acompanhamento 
+                    personalizado da especialista em saúde da mulher.
+                  </p>
+                  <a
+                    href="https://lastlink.com/p/C3B759A85/checkout-payment/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 bg-gradient-to-r from-primary-600 to-purple-600 text-white px-8 py-4 rounded-full font-semibold text-lg hover:from-primary-700 hover:to-purple-700 transition-colors"
+                  >
+                    <Sparkles className="w-5 h-5" />
+                    Garantir Minha Vaga
+                  </a>
+                  <p className="text-sm text-gray-500 mt-4">
+                    Você será redirecionado automaticamente em 5 segundos...
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Resumo do Plano */}
+            <div className="bg-white rounded-2xl shadow-lg p-8">
+              <h3 className="text-xl font-bold text-gray-900 mb-6">Resumo do Seu Plano</h3>
               <div className="grid md:grid-cols-3 gap-4">
-                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4">
-                  <div className="flex items-center gap-2 mb-2">
-                    <Activity className="w-5 h-5" />
-                    <span className="text-sm font-semibold">IMC</span>
-                  </div>
-                  <p className="text-2xl font-bold">{recommendations.pontuacao.imc}</p>
+                <div className="bg-primary-50 p-4 rounded-xl">
+                  <Utensils className="w-6 h-6 text-primary-600 mb-2" />
+                  <h4 className="font-bold text-gray-900 mb-1">Plano Alimentar</h4>
+                  <p className="text-sm text-gray-600">{recommendations.dieta.nivel}</p>
                 </div>
-                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4">
-                  <div className="flex items-center gap-2 mb-2">
-                    <Heart className="w-5 h-5" />
-                    <span className="text-sm font-semibold">Nível de Dor</span>
-                  </div>
-                  <p className="text-2xl font-bold">{recommendations.pontuacao.nivelDor}/10</p>
+                <div className="bg-purple-50 p-4 rounded-xl">
+                  <Hand className="w-6 h-6 text-purple-600 mb-2" />
+                  <h4 className="font-bold text-gray-900 mb-1">Protocolo de Massagem</h4>
+                  <p className="text-sm text-gray-600">{recommendations.massagem.frequencia}</p>
                 </div>
-                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4">
-                  <div className="flex items-center gap-2 mb-2">
-                    <Target className="w-5 h-5" />
-                    <span className="text-sm font-semibold">Status</span>
-                  </div>
-                  <p className="text-2xl font-bold">{recommendations.pontuacao.status}</p>
+                <div className="bg-blue-50 p-4 rounded-xl">
+                  <Activity className="w-6 h-6 text-blue-600 mb-2" />
+                  <h4 className="font-bold text-gray-900 mb-1">Plano de Exercícios</h4>
+                  <p className="text-sm text-gray-600">{recommendations.exercicios.intensidade}</p>
                 </div>
               </div>
-            </div>
-
-            {/* Recomendação de Dieta */}
-            <div className="bg-white rounded-2xl shadow-lg p-8">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
-                  <Utensils className="w-6 h-6 text-green-600" />
-                </div>
-                <div>
-                  <h3 className="text-2xl font-bold text-gray-900">{recommendations.dieta.titulo}</h3>
-                  <p className="text-gray-600">Nível: {recommendations.dieta.nivel}</p>
-                </div>
-              </div>
-              
-              <div className="grid md:grid-cols-2 gap-6 mb-6">
-                <div>
-                  <h4 className="font-bold text-green-600 mb-3 flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4" />
-                    Alimentos Recomendados
-                  </h4>
-                  <ul className="space-y-2">
-                    {recommendations.dieta.alimentos.map((alimento, index) => (
-                      <li key={index} className="flex items-start gap-2 text-gray-600">
-                        <ChevronRight className="w-4 h-4 text-green-500 flex-shrink-0 mt-1" />
-                        {alimento}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div>
-                  <h4 className="font-bold text-red-600 mb-3 flex items-center gap-2">
-                    <XCircle className="w-4 h-4" />
-                    Alimentos a Evitar
-                  </h4>
-                  <ul className="space-y-2">
-                    {recommendations.dieta.evitar.map((alimento, index) => (
-                      <li key={index} className="flex items-start gap-2 text-gray-600">
-                        <ChevronRight className="w-4 h-4 text-red-500 flex-shrink-0 mt-1" />
-                        {alimento}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </div>
-
-            {/* Recomendação de Massagem */}
-            <div className="bg-white rounded-2xl shadow-lg p-8">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center">
-                  <Hand className="w-6 h-6 text-purple-600" />
-                </div>
-                <div>
-                  <h3 className="text-2xl font-bold text-gray-900">{recommendations.massagem.titulo}</h3>
-                  <p className="text-gray-600">{recommendations.massagem.frequencia} • {recommendations.massagem.duracao}</p>
-                </div>
-              </div>
-              
-              <div className="grid md:grid-cols-2 gap-6 mb-6">
-                <div>
-                  <h4 className="font-bold text-purple-600 mb-3 flex items-center gap-2">
-                    <Zap className="w-4 h-4" />
-                    Técnicas
-                  </h4>
-                  <ul className="space-y-2">
-                    {recommendations.massagem.tecnicas.map((tecnica, index) => (
-                      <li key={index} className="flex items-start gap-2 text-gray-600">
-                        <ChevronRight className="w-4 h-4 text-purple-500 flex-shrink-0 mt-1" />
-                        {tecnica}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div>
-                  <h4 className="font-bold text-purple-600 mb-3 flex items-center gap-2">
-                    <Target className="w-4 h-4" />
-                    Áreas de Foco
-                  </h4>
-                  <ul className="space-y-2">
-                    {recommendations.massagem.areasFoco.map((area, index) => (
-                      <li key={index} className="flex items-start gap-2 text-gray-600">
-                        <ChevronRight className="w-4 h-4 text-purple-500 flex-shrink-0 mt-1" />
-                        {area}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </div>
-
-            {/* Recomendação de Exercícios */}
-            <div className="bg-white rounded-2xl shadow-lg p-8">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
-                  <Activity className="w-6 h-6 text-blue-600" />
-                </div>
-                <div>
-                  <h3 className="text-2xl font-bold text-gray-900">{recommendations.exercicios.titulo}</h3>
-                  <p className="text-gray-600">Intensidade: {recommendations.exercicios.intensidade} • {recommendations.exercicios.duracao}</p>
-                </div>
-              </div>
-              
-              <div>
-                <h4 className="font-bold text-blue-600 mb-3 flex items-center gap-2">
-                  <TrendingUp className="w-4 h-4" />
-                  Atividades Recomendadas
-                </h4>
-                <div className="grid md:grid-cols-2 gap-4">
-                  {recommendations.exercicios.atividades.map((atividade, index) => (
-                    <div key={index} className="flex items-start gap-3 p-4 bg-blue-50 rounded-xl">
-                      <div className="w-8 h-8 bg-blue-200 rounded-full flex items-center justify-center flex-shrink-0">
-                        <span className="text-blue-700 font-bold text-sm">{index + 1}</span>
-                      </div>
-                      <span className="text-gray-700">{atividade}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* Botões de ação */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button
-                onClick={() => setCurrentStep('form')}
-                className="inline-flex items-center justify-center gap-2 bg-gray-200 text-gray-700 px-6 sm:px-8 py-3.5 sm:py-4 rounded-full font-semibold hover:bg-gray-300 transition-colors"
-              >
-                <Calendar className="w-5 h-5" />
-                Editar Dados
-              </button>
-              <a
-                href="https://lastlink.com/p/C3B759A85/checkout-payment/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-primary-600 via-purple-600 to-pink-600 text-white px-6 sm:px-8 py-3.5 sm:py-4 rounded-full font-semibold hover:from-primary-700 hover:via-purple-700 hover:to-pink-700 transition-all shadow-xl hover:shadow-2xl transform hover:scale-[1.02] active:scale-[0.98]"
-              >
-                <Sparkles className="w-5 h-5" />
-                Ir para Checkout
-              </a>
             </div>
           </div>
         )}
