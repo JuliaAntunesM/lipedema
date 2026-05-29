@@ -18,22 +18,15 @@ function LandingPage() {
       {/* Hero Section */}
       <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-primary-50 to-white">
         <div className="max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="text-center lg:text-left">
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
-                Você Não Precisa Viver com Essa
-                <span className="text-gradient"> Dor</span>
-              </h1>
-              <p className="text-xl text-gray-600 mb-8">
-                Sabemos como é difícil acordar todos os dias com as pernas pesadas, com dor constante, e sentir que seu corpo não te deixa viver plenamente. 
-                O LipedemaCare está aqui para transformar essa realidade.
-              </p>
-            </div>
-            <div className="relative">
-              <div className="bg-gradient-to-br from-primary-500 to-purple-600 rounded-3xl shadow-2xl w-full max-w-lg mx-auto p-12 flex items-center justify-center">
-                <Heart className="w-32 h-32 text-white" />
-              </div>
-            </div>
+          <div className="text-center">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
+              Você Não Precisa Viver com Essa
+              <span className="text-gradient"> Dor</span>
+            </h1>
+            <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+              Sabemos como é difícil acordar todos os dias com as pernas pesadas, com dor constante, e sentir que seu corpo não te deixa viver plenamente. 
+              O LipedemaCare está aqui para transformar essa realidade.
+            </p>
           </div>
         </div>
       </section>
