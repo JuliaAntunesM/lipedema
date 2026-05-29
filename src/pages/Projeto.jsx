@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { Heart, Activity, Calendar, Users, Shield, Smartphone, Save, CheckCircle, XCircle, Clock, Utensils, Hand, BookOpen, Sparkles, TrendingUp, Target, Zap, ChevronRight, Loader2 } from 'lucide-react'
 
 function Projeto() {
@@ -199,9 +200,9 @@ function Projeto() {
                   Editar Dados
                 </button>
               )}
-              <a href="/" className="text-primary-600 hover:text-primary-700 font-semibold">
+              <Link to="/" className="text-primary-600 hover:text-primary-700 font-semibold">
                 Voltar para Home
-              </a>
+              </Link>
             </div>
           </div>
         </div>
