@@ -320,7 +320,7 @@ function LandingPage() {
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div className="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-shadow">
-              <img src="/assets/3.png" alt="Acompanhamento" className="w-full aspect-square object-contain rounded-xl mb-4 bg-gray-50" />
+              <img src="/fotos/3.png" alt="Acompanhamento" className="w-full aspect-square object-contain rounded-xl mb-4 bg-gray-50" />
               <div className="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center mb-3">
                 <Calendar className="w-6 h-6 text-primary-600" />
               </div>
@@ -330,7 +330,7 @@ function LandingPage() {
               </p>
             </div>
             <div className="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-shadow">
-              <img src="/assets/4.png" alt="Exercícios" className="w-full aspect-square object-contain rounded-xl mb-4 bg-gray-50" />
+              <img src="/fotos/4.png" alt="Exercícios" className="w-full aspect-square object-contain rounded-xl mb-4 bg-gray-50" />
               <div className="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center mb-3">
                 <Activity className="w-6 h-6 text-primary-600" />
               </div>
@@ -340,7 +340,7 @@ function LandingPage() {
               </p>
             </div>
             <div className="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-shadow">
-              <img src="/assets/5.png" alt="Monitoramento" className="w-full aspect-square object-contain rounded-xl mb-4 bg-gray-50" />
+              <img src="/fotos/5.png" alt="Monitoramento" className="w-full aspect-square object-contain rounded-xl mb-4 bg-gray-50" />
               <div className="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center mb-3">
                 <Heart className="w-6 h-6 text-primary-600" />
               </div>
@@ -350,7 +350,7 @@ function LandingPage() {
               </p>
             </div>
             <div className="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-shadow">
-              <img src="/assets/6.png" alt="Comunidade" className="w-full aspect-square object-contain rounded-xl mb-4 bg-gray-50" />
+              <img src="/fotos/6.png" alt="Comunidade" className="w-full aspect-square object-contain rounded-xl mb-4 bg-gray-50" />
               <div className="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center mb-3">
                 <Users className="w-6 h-6 text-primary-600" />
               </div>
@@ -360,7 +360,7 @@ function LandingPage() {
               </p>
             </div>
             <div className="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-shadow">
-              <img src="/assets/7.png" alt="Educação" className="w-full aspect-square object-contain rounded-xl mb-4 bg-gray-50" />
+              <img src="/fotos/7.png" alt="Educação" className="w-full aspect-square object-contain rounded-xl mb-4 bg-gray-50" />
               <div className="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center mb-3">
                 <Shield className="w-6 h-6 text-primary-600" />
               </div>
@@ -370,7 +370,7 @@ function LandingPage() {
               </p>
             </div>
             <div className="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-shadow">
-              <img src="/assets/8.png" alt="Lembretes" className="w-full aspect-square object-contain rounded-xl mb-4 bg-gray-50" />
+              <img src="/fotos/8.png" alt="Lembretes" className="w-full aspect-square object-contain rounded-xl mb-4 bg-gray-50" />
               <div className="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center mb-3">
                 <Smartphone className="w-6 h-6 text-primary-600" />
               </div>
