@@ -191,6 +191,13 @@ function LandingPage() {
                 </p>
                 <p className="text-white/90">- Carina Silva</p>
               </div>
+
+              <div className="text-center">
+                <Link to="/projeto" className="inline-flex items-center gap-2 bg-gradient-to-r from-primary-600 to-purple-600 text-white px-8 py-4 rounded-full font-semibold text-lg hover:from-primary-700 hover:to-purple-700 transition-colors">
+                  <Sparkles className="w-5 h-5" />
+                  Começar Minha Jornada com Carina
+                </Link>
+              </div>
             </div>
           </div>
         </div>
@@ -305,6 +312,12 @@ function LandingPage() {
               </div>
             </div>
           </div>
+          <div className="text-center">
+            <Link to="/projeto" className="inline-flex items-center gap-2 bg-gradient-to-r from-primary-600 to-purple-600 text-white px-8 py-4 rounded-full font-semibold text-lg hover:from-primary-700 hover:to-purple-700 transition-colors">
+              <Sparkles className="w-5 h-5" />
+              Quero Aprender Mais Sobre Lipedema
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -381,6 +394,22 @@ function LandingPage() {
               </p>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* CTA antes dos Depoimentos */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">
+            Pronta para Transformar Sua Vida?
+          </h2>
+          <p className="text-xl text-gray-600 mb-8">
+            Junte-se a milhares de mulheres que decidiram recuperar sua saúde e bem-estar
+          </p>
+          <Link to="/projeto" className="inline-flex items-center gap-2 bg-gradient-to-r from-primary-600 to-purple-600 text-white px-8 py-4 rounded-full font-semibold text-lg hover:from-primary-700 hover:to-purple-700 transition-colors">
+            <Sparkles className="w-5 h-5" />
+            Quero Começar Minha Transformação
+          </Link>
         </div>
       </section>
 
